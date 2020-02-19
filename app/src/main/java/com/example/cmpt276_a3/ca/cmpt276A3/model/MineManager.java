@@ -1,11 +1,9 @@
 package com.example.cmpt276_a3.ca.cmpt276A3.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class MineManager {
     private List<Mine> mines = new ArrayList<>();
@@ -30,8 +28,9 @@ public class MineManager {
         for(int i=0; i<rows*columns; i++) {
             //instance.add(new Mine(false, false));
             for(int index: randIndexes) {
-                if(j < 10 && index == j) {
+                if(j < count && index == j) {
                     instance.add(new Mine(false, true));
+                    j++;
                 }
                 else
                     instance.add(new Mine(false, false));
