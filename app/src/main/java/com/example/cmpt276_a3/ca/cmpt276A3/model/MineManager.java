@@ -13,9 +13,17 @@ public class MineManager {
     private int columns = 6;
     private int count = 10;
 
-    public MineManager(int count) {
+    public MineManager(int rows, int columns, int count) {
         this.count = count;
+        this.rows = rows;
+        this.columns = columns;
         populateMines();
+    }
+
+    public MineManager() {
+        /**
+         * Prevent anyone else from accessing
+         */
     }
 
     private void populateMines() {
@@ -46,31 +54,19 @@ public class MineManager {
         return rows;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
     public int getColumns() {
         return columns;
-    }
-
-    public void setColumns(int columns) {
-        this.columns = columns;
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     private static MineManager instance;
 
     public static MineManager getInstance() {
         if(instance == null) {
-            instance = new MineManager(0);
+            instance = new MineManager();
         }
         return instance;
     }

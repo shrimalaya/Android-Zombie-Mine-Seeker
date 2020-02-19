@@ -3,6 +3,8 @@ package com.example.cmpt276_a3;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
+import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.GameActivity;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.HelpActivity;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.OptionsActivity;
