@@ -48,22 +48,22 @@ public class MineManager {
         }
         Collections.shuffle(randIndexes);
 
-        int k=0;
         for(int i=0; i<rows; i++) {
             for(int j=0; j<columns; j++) {
+                int k=0;
                 for(int index: randIndexes) {
-                    if(k<10 && index == (i*columns + j)) {
-                        mines[i][j] = new Mine(false, true);
-                    }
-                    else
+                    if(k<count) {
+                        if (index == (i * columns + j)) {
+                            mines[i][j] = new Mine(false, true);
+                        } else
+                            mines[i][j] = new Mine(false, false);
+                        k++;
+                    } else
                         mines[i][j] = new Mine(false, false);
                 }
             }
         }
     }
-
-    // public void add(Mine mine) {mines.add(mine);}
-
 
     public int getRows() {
         return rows;
