@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="board_sizes">
+        <item>4 X 6</item>
+        <item>5 X 10</item>
+        <item>6 X 15</item>
+    </string-array>
+</resources>
