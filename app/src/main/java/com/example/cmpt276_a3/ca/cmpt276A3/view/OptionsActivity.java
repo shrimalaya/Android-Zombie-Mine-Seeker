@@ -39,6 +39,7 @@ public class OptionsActivity extends AppCompatActivity {
         createRadioNumMines();
         createRadioSizes();
         checkTotalReset();
+        manager.populateMines();
     }
 
     private void createRadioNumMines() {

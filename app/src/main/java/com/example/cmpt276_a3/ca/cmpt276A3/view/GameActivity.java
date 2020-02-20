@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
 import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +26,8 @@ import com.example.cmpt276_a3.R;
 
 public class GameActivity extends AppCompatActivity {
     MineManager manager = MineManager.getInstance();
+    int num_scans = 0;
+    int num_found = 0;
 
     Button buttons[][] = new Button[manager.getRows()][manager.getColumns()];
 
@@ -69,7 +72,20 @@ public class GameActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gridButtonClicked(finalRow, finalCol);
+                        Mine temp = manager.getMines(finalRow, finalCol);
+                        if(temp.isPresent()) {
+                            if (temp.isRevealed()) {
+                                num_scans++;
+                                gridButtonClicked(finalRow, finalCol);
+                            } else {
+                                setRevealed(finalRow, finalCol);
+                                num_found++;
+                            }
+                        }
+                        else {
+                            num_scans++;
+                            displayInfo(finalRow, finalCol);
+                        }
                     }
                 });
                 tableRow.addView(button);
@@ -78,6 +94,11 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * PRE: Mine is already revealed
+     * Display mine
+     * Display count of unrevealed mines in same row and column
+     */
     private void gridButtonClicked(int x, int y) {
         Button button = buttons[x][y];
         //Make text not clip on small buttons
@@ -85,9 +106,6 @@ public class GameActivity extends AppCompatActivity {
 
         // Lock button sizes
         lockButtonSizes();
-
-        // Does not scale background to button
-        //button.setBackgroundResource(R.drawable.clear_action);
 
         // Scale background to button
         int newWidth = button.getWidth();
@@ -98,7 +116,8 @@ public class GameActivity extends AppCompatActivity {
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
         // Set the text
-        button.setText("" + y);
+        button.setText("" + initScan(x, y));
+
     }
 
     private void lockButtonSizes() {
@@ -117,4 +136,45 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set the mine as revealed
+     * Display the mine but do not display any text
+     */
+    private void setRevealed(int x, int y) {
+        manager.getMines(x, y).reveal();
+        Button button = buttons[x][y];
+        //Make text not clip on small buttons
+        button.setPadding(0,0,0,0);
+
+        // Lock button sizes
+        lockButtonSizes();
+
+        // Scale background to button
+        int newWidth = button.getWidth();
+        int newHeight = button.getHeight();
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_history);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+        Resources resource =  getResources();
+        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+
+        // Set the text
+        button.setText("");
+    }
+
+    /**
+     * PRE: No mine present at selected index
+     * Set index as revealed
+     * Display count of unrevealed mines in same row and column
+     */
+    private void displayInfo(int x, int y) {
+        manager.getMines(x, y).reveal();
+
+    }
+
+    private int initScan(int x, int y) {
+        int scans = 0;
+        // TODO: Implement function
+
+        return scans;
+    }
 }

@@ -1,17 +1,15 @@
 package com.example.cmpt276_a3.ca.cmpt276A3.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class MineManager {
-    private List<Mine> mines = new ArrayList<>();
     private int rows = 4;
     private int columns = 6;
     private int count = 10;
+    private Mine[][] mines;
 
     public MineManager(int rows, int columns, int count) {
         this.count = count;
@@ -24,6 +22,7 @@ public class MineManager {
         /**
          * Prevent anyone else from accessing
          */
+        populateMines();
     }
 
     public void setRows(int rows) {
@@ -38,28 +37,32 @@ public class MineManager {
         this.count = count;
     }
 
-    private void populateMines() {
+    public void populateMines() {
+        mines = new Mine[rows][columns];
+
         ArrayList<Integer> randIndexes = new ArrayList<>();
+
         for(int i=0; i<rows*columns; i++)
         {
             randIndexes.add(new Integer(i));
         }
         Collections.shuffle(randIndexes);
 
-        int j=0;
-        for(int i=0; i<rows*columns; i++) {
-            //instance.add(new Mine(false, false));
-            for(int index: randIndexes) {
-                if(j < 10 && index == j) {
-                    instance.add(new Mine(false, true));
+        int k=0;
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<columns; j++) {
+                for(int index: randIndexes) {
+                    if(k<10 && index == (i*columns + j)) {
+                        mines[i][j] = new Mine(false, true);
+                    }
+                    else
+                        mines[i][j] = new Mine(false, false);
                 }
-                else
-                    instance.add(new Mine(false, false));
             }
         }
     }
 
-    public void add(Mine mine) {mines.add(mine);}
+    // public void add(Mine mine) {mines.add(mine);}
 
 
     public int getRows() {
@@ -83,14 +86,7 @@ public class MineManager {
         return instance;
     }
 
-    public Iterator<Mine> iterator() {return mines.iterator();}
-
-    public int getManagerSize() {
-        int size = 0;
-        for(Mine mine: mines)
-            size++;
-
-        return size;
+    public Mine getMines(int i, int j) {
+        return mines[i][j];
     }
-
 }
