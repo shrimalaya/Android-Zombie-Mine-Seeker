@@ -19,7 +19,7 @@ import com.example.cmpt276_a3.R;
 
 public class OptionsActivity extends AppCompatActivity {
 
-    private MineManager manager = MineManager.getInstance();
+    private MineManager manager;
 
     private static final String EXTRA_MESSAGE = "Extra";
 
@@ -38,11 +38,14 @@ public class OptionsActivity extends AppCompatActivity {
 
         createRadioNumMines();
         createRadioSizes();
-        checkTotalReset();
+        manager = MineManager.getInstance();
         manager.populateMines();
+
+        checkTotalReset();
     }
 
     private void createRadioNumMines() {
+        manager = MineManager.getInstance();
         RadioGroup numMines = findViewById(R.id.radioNumMines);
 
         int[] mineOptions = getResources().getIntArray(R.array.num_mines);
@@ -58,6 +61,8 @@ public class OptionsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     manager.setCount(mineOption);
+                    manager.populateMines();
+                    System.out.println("In number: " + manager.getRows() + "," + manager.getColumns() + "  Count = " + mineOption + "\n\n");
                 }
             });
 
@@ -67,6 +72,7 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     private void createRadioSizes() {
+        manager = MineManager.getInstance();
         RadioGroup sizes = findViewById(R.id.radioSizes);
 
         int[] rowOptions = getResources().getIntArray(R.array.board_rows);
@@ -86,6 +92,8 @@ public class OptionsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     manager.setRows(rowOption);
                     manager.setColumns(colOption);
+                    manager.populateMines();
+                    System.out.println("In sizes: " + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
                 }
             });
 
@@ -95,11 +103,14 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     private void checkTotalReset() {
+
         Button button = findViewById(R.id.btnReset);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(OptionsActivity.this, "Reset Total", Toast.LENGTH_SHORT).show();
+                manager = MineManager.getInstance();
+                System.out.println("Main instance: " + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
             }
         });
     }

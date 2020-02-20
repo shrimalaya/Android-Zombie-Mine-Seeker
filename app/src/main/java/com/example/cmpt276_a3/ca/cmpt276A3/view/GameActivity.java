@@ -44,13 +44,17 @@ public class GameActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        manager = MineManager.getInstance();
+        System.out.println("\n\n" + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
         populateButtons();
         TextView textView = findViewById(R.id.txtMaxMines);
         textView.setText("" + manager.getCount());
         updateUI();
+        System.out.println("\n\n" + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
     }
 
     private void populateButtons() {
+        manager = MineManager.getInstance();
         TableLayout table = (TableLayout) findViewById(R.id.tableMines);
         for(int i=0; i<manager.getRows(); i++) {
             TableRow tableRow = new TableRow(this);
@@ -98,6 +102,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
+        manager = MineManager.getInstance();
         for(int i = 0; i < manager.getRows(); i++){
             for(int j = 0; j < manager.getColumns(); j++) {
                 Button button = buttons[i][j];
@@ -118,6 +123,7 @@ public class GameActivity extends AppCompatActivity {
      * Display the mine but do not display any text
      */
     private void setMineRevealed(int x, int y) {
+        manager = MineManager.getInstance();
         manager.getMines(x, y).reveal();
         Button button = buttons[x][y];
         //Make text not clip on small buttons
@@ -144,6 +150,7 @@ public class GameActivity extends AppCompatActivity {
      * The current mine should be already revealed for the helper func to work
      */
     private void updateUI() {
+        manager = MineManager.getInstance();
         TextView found = findViewById(R.id.txtFoundMines);
         TextView totalScans = findViewById(R.id.txtScans);
 
@@ -158,6 +165,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateRowsAndCols(int x, int y) {
+        manager = MineManager.getInstance();
         int count = 0;
         for(int i=0; i<manager.getColumns(); i++) {
             Mine temp = manager.getMines(x, i);

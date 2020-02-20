@@ -5,24 +5,31 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Singleton class
+ */
 public class MineManager {
-    private int rows = 4;
-    private int columns = 6;
-    private int count = 10;
+    private int rows;
+    private int columns;
+    private int count;
     private Mine[][] mines;
 
-    public MineManager(int rows, int columns, int count) {
-        this.count = count;
-        this.rows = rows;
-        this.columns = columns;
-        populateMines();
-    }
-
-    public MineManager() {
+    private MineManager() {
         /**
          * Prevent anyone else from accessing
          */
-        populateMines();
+    }
+
+    /**
+     * Singleton support
+     */
+    private static MineManager instance;
+
+    public static MineManager getInstance() {
+        if(instance == null) {
+            instance = new MineManager();
+        }
+        return instance;
     }
 
     public void setRows(int rows) {
@@ -38,8 +45,8 @@ public class MineManager {
     }
 
     public void populateMines() {
+        System.out.println("\n\n" + this.getRows() + "," + this.getColumns() + "  Count = " + this.getCount() + "\n\n");
         mines = new Mine[rows][columns];
-
         ArrayList<Integer> randIndexes = new ArrayList<>();
 
         for(int i=0; i<rows*columns; i++)
@@ -47,20 +54,36 @@ public class MineManager {
             randIndexes.add(new Integer(i));
         }
         Collections.shuffle(randIndexes);
+        for(int index: randIndexes) {
+            System.out.println(index);
+        }
 
         for(int i=0; i<rows; i++) {
             for(int j=0; j<columns; j++) {
                 int k=0;
+                boolean isDone = false;
                 for(int index: randIndexes) {
-                    if(k<count) {
-                        if (index == (i * columns + j)) {
+                    if(k<count && isDone==false) {
+                        if (index == (i * columns) + j) {
+                            System.out.println("Index matched.");
                             mines[i][j] = new Mine(false, true);
+                            isDone = true;
                         } else
                             mines[i][j] = new Mine(false, false);
                         k++;
-                    } else
+                    }
+                    else if(isDone == false)
                         mines[i][j] = new Mine(false, false);
                 }
+            }
+        }
+        printMines();
+    }
+
+    private void printMines() {
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<columns; j++) {
+                System.out.println("Is revealed:" + getMines(i,j).isRevealed() + ", is Present: " + getMines(i,j).isPresent());
             }
         }
     }
@@ -77,16 +100,9 @@ public class MineManager {
         return count;
     }
 
-    private static MineManager instance;
-
-    public static MineManager getInstance() {
-        if(instance == null) {
-            instance = new MineManager();
-        }
-        return instance;
-    }
-
-    public Mine getMines(int i, int j) {
-        return mines[i][j];
+    public Mine getMines(int x, int y) {
+        System.out.println("\n\nIn mine manager class: " + this.getRows() + "," + this.getColumns() + "  Count = " + this.getCount() + "\n\n");
+        System.out.println("x = " + x + " and Y = " + y);
+        return mines[x][y];
     }
 }
