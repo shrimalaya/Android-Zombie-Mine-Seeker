@@ -26,6 +26,18 @@ public class MineManager {
          */
     }
 
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     private void populateMines() {
         ArrayList<Integer> randIndexes = new ArrayList<>();
         for(int i=0; i<rows*columns; i++)

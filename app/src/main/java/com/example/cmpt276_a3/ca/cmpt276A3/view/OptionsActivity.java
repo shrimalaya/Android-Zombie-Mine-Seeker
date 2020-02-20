@@ -9,9 +9,11 @@ import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.cmpt276_a3.R;
 
@@ -36,7 +38,7 @@ public class OptionsActivity extends AppCompatActivity {
 
         createRadioNumMines();
         createRadioSizes();
-        recordPreferences();
+        checkTotalReset();
     }
 
     private void createRadioNumMines() {
@@ -46,12 +48,17 @@ public class OptionsActivity extends AppCompatActivity {
 
         // Create the buttons
         for(int i=0; i < mineOptions.length; i++) {
-            int mineOption = mineOptions[i];
+            final int mineOption = mineOptions[i];
 
             RadioButton button = new RadioButton(this);
             button.setText(mineOption + " mines");
 
-            // TODO: Set on-click callbacks
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    manager.setCount(mineOption);
+                }
+            });
 
             // Add to radio group
             numMines.addView(button);
@@ -61,27 +68,39 @@ public class OptionsActivity extends AppCompatActivity {
     private void createRadioSizes() {
         RadioGroup sizes = findViewById(R.id.radioSizes);
 
-        String[] sizeOptions = getResources().getStringArray(R.array.board_sizes);
+        int[] rowOptions = getResources().getIntArray(R.array.board_rows);
+        int[] colOptions = getResources().getIntArray(R.array.board_cols);
 
         // Create the buttons
-        for(int i=0; i < sizeOptions.length; i++) {
-            String sizeOption = sizeOptions[i];
+        for(int i=0; i < rowOptions.length; i++) {
+            final int rowOption = rowOptions[i];
+            final int colOption = colOptions[i];
 
 
-            RadioButton button = new RadioButton(this);
-            button.setText(sizeOption);
+            final RadioButton button = new RadioButton(this);
+            button.setText(rowOption + " rows by " + colOption + " columns");
 
-            // TODO: Set on-click callbacks
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    manager.setRows(rowOption);
+                    manager.setColumns(colOption);
+                }
+            });
 
             // Add to radio group
             sizes.addView(button);
         }
     }
 
-    private void recordPreferences() {
-        Button radioSize;
-        Button radioMines;
-
+    private void checkTotalReset() {
+        Button button = findViewById(R.id.btnReset);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(OptionsActivity.this, "Reset Total", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
