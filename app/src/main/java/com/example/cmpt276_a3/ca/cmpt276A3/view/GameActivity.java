@@ -8,9 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
 import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,12 +18,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.cmpt276_a3.R;
 
 public class GameActivity extends AppCompatActivity {
     MineManager manager = MineManager.getInstance();
+    int num_scans = 0;
+    int num_found = 0;
 
     Button buttons[][] = new Button[manager.getRows()][manager.getColumns()];
 
@@ -44,6 +45,9 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         populateButtons();
+        TextView textView = findViewById(R.id.txtMaxMines);
+        textView.setText("" + manager.getCount());
+        updateUI();
     }
 
     private void populateButtons() {
@@ -69,36 +73,28 @@ public class GameActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gridButtonClicked(finalRow, finalCol);
+                        Mine temp = manager.getMines(finalRow, finalCol);
+                        if(temp.isPresent()) {
+                            if (temp.isRevealed()) {
+                                num_scans++;
+                                updateUI();
+                            } else {
+                                num_found++;
+                                updateUI();
+                                setMineRevealed(finalRow, finalCol);
+                            }
+                        }
+                        else {
+                            num_scans++;
+                            manager.getMines(finalRow, finalCol).reveal();
+                            updateUI();
+                        }
                     }
                 });
                 tableRow.addView(button);
                 buttons[i][j] = button;
             }
         }
-    }
-
-    private void gridButtonClicked(int x, int y) {
-        Button button = buttons[x][y];
-        //Make text not clip on small buttons
-        button.setPadding(0,0,0,0);
-
-        // Lock button sizes
-        lockButtonSizes();
-
-        // Does not scale background to button
-        //button.setBackgroundResource(R.drawable.clear_action);
-
-        // Scale background to button
-        int newWidth = button.getWidth();
-        int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.clear_action);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-        Resources resource =  getResources();
-        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-
-        // Set the text
-        button.setText("" + y);
     }
 
     private void lockButtonSizes() {
@@ -117,4 +113,68 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set the mine as revealed
+     * Display the mine but do not display any text
+     */
+    private void setMineRevealed(int x, int y) {
+        manager.getMines(x, y).reveal();
+        Button button = buttons[x][y];
+        //Make text not clip on small buttons
+        button.setPadding(0,0,0,0);
+
+        // Lock button sizes
+        lockButtonSizes();
+
+        // Scale background to button
+        int newWidth = button.getWidth();
+        int newHeight = button.getHeight();
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_history);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+        Resources resource =  getResources();
+        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+
+        // Set the text
+        button.setText("");
+    }
+
+    /**
+     * Update number of scans and mines found
+     * Update the number of unrevealed mines in the same column and row
+     * The current mine should be already revealed for the helper func to work
+     */
+    private void updateUI() {
+        TextView found = findViewById(R.id.txtFoundMines);
+        TextView totalScans = findViewById(R.id.txtScans);
+
+        found.setText("" + num_found);
+        totalScans.setText("" + num_scans);
+
+        for(int i=0; i<manager.getRows(); i++) {
+            for (int j = 0; j < manager.getColumns(); j++) {
+                updateRowsAndCols(i, j);
+            }
+        }
+    }
+
+    private void updateRowsAndCols(int x, int y) {
+        int count = 0;
+        for(int i=0; i<manager.getColumns(); i++) {
+            Mine temp = manager.getMines(x, i);
+            if(temp.isPresent() && !(temp.isRevealed())) {
+                count++;
+            }
+        }
+
+        for(int j=0; j<manager.getRows(); j++) {
+            Mine temp = manager.getMines(j, y);
+            if(temp.isPresent() && !(temp.isRevealed())) {
+                count++;
+            }
+        }
+        if(manager.getMines(x, y).isRevealed()) {
+            Button button = buttons[x][y];
+            button.setText("" + count);
+        }
+    }
 }

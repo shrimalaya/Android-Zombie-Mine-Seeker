@@ -6,82 +6,87 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MineManager {
-    private List<Mine> mines = new ArrayList<>();
     private int rows = 4;
     private int columns = 6;
     private int count = 10;
+    private Mine[][] mines;
 
-    public MineManager(int count) {
+    public MineManager(int rows, int columns, int count) {
         this.count = count;
+        this.rows = rows;
+        this.columns = columns;
         populateMines();
     }
 
-    private void populateMines() {
-        ArrayList<Integer> randIndexes = new ArrayList<>();
-        for(int i=0; i<rows*columns; i++)
-        {
-            randIndexes.add(new Integer(i));
-        }
-        Collections.shuffle(randIndexes);
-
-        int j=0;
-        for(int i=0; i<rows*columns; i++) {
-            //instance.add(new Mine(false, false));
-            for(int index: randIndexes) {
-                if(j < count && index == j) {
-                    instance.add(new Mine(false, true));
-                    j++;
-                }
-                else
-                    instance.add(new Mine(false, false));
-            }
-        }
-    }
-
-    public void add(Mine mine) {mines.add(mine);}
-
-
-    public int getRows() {
-        return rows;
+    public MineManager() {
+        /**
+         * Prevent anyone else from accessing
+         */
+        populateMines();
     }
 
     public void setRows(int rows) {
         this.rows = rows;
     }
 
-    public int getColumns() {
-        return columns;
-    }
-
     public void setColumns(int columns) {
         this.columns = columns;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public void setCount(int count) {
         this.count = count;
     }
 
+    public void populateMines() {
+        mines = new Mine[rows][columns];
+
+        ArrayList<Integer> randIndexes = new ArrayList<>();
+
+        for(int i=0; i<rows*columns; i++)
+        {
+            randIndexes.add(new Integer(i));
+        }
+        Collections.shuffle(randIndexes);
+
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<columns; j++) {
+                int k=0;
+                for(int index: randIndexes) {
+                    if(k<count) {
+                        if (index == (i * columns + j)) {
+                            mines[i][j] = new Mine(false, true);
+                        } else
+                            mines[i][j] = new Mine(false, false);
+                        k++;
+                    } else
+                        mines[i][j] = new Mine(false, false);
+                }
+            }
+        }
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     private static MineManager instance;
 
     public static MineManager getInstance() {
         if(instance == null) {
-            instance = new MineManager(0);
+            instance = new MineManager();
         }
         return instance;
     }
 
-    public Iterator<Mine> iterator() {return mines.iterator();}
-
-    public int getManagerSize() {
-        int size = 0;
-        for(Mine mine: mines)
-            size++;
-
-        return size;
+    public Mine getMines(int i, int j) {
+        return mines[i][j];
     }
-
 }

@@ -9,67 +9,23 @@
     tools:showIn="@layout/activity_options">
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioSizes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="4 X 16" />
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5 X 10" />
-
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="6 X 15" />
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/textView2"/>
 
     <RadioGroup
-        android:id="@+id/radioGroup2"
+        android:id="@+id/radioNumMines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        app:layout_constraintStart_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toTopOf="@+id/radioGroup">
-
-        <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="6 mines" />
-
-        <RadioButton
-            android:id="@+id/radioButton7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="10 mines" />
-
-        <RadioButton
-            android:id="@+id/radioButton8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="15 mines" />
-
-        <RadioButton
-            android:id="@+id/radioButton9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="20 mines" />
-    </RadioGroup>
+        app:layout_constraintStart_toEndOf="@+id/radioSizes"
+        app:layout_constraintTop_toTopOf="@+id/radioSizes"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -92,8 +48,8 @@
         android:layout_marginBottom="8dp"
         android:text="Size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup" />
+        app:layout_constraintBottom_toTopOf="@+id/radioSizes"
+        app:layout_constraintStart_toStartOf="@+id/radioSizes" />
 
     <TextView
         android:id="@+id/textView4"
@@ -103,11 +59,11 @@
         android:text="Number of mines"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup2" />
+        app:layout_constraintBottom_toTopOf="@+id/radioNumMines"
+        app:layout_constraintStart_toStartOf="@+id/radioNumMines" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
@@ -119,6 +75,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintTop_toBottomOf="@+id/radioNumMines" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

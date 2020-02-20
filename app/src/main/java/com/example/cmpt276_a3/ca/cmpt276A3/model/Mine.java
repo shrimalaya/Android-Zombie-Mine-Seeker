@@ -8,4 +8,16 @@ public class Mine {
         this.revealed = revealed;
         this.isPresent = isPresent;
     }
+
+    public boolean isRevealed() {
+        return revealed;
+    }
+
+    public void reveal() {
+        this.revealed = true;
+    }
+
+    public boolean isPresent() {
+        return isPresent;
+    }
 }
