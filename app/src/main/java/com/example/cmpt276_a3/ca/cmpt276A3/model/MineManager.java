@@ -45,7 +45,6 @@ public class MineManager {
     }
 
     public void populateMines() {
-        System.out.println("\n\n" + this.getRows() + "," + this.getColumns() + "  Count = " + this.getCount() + "\n\n");
         mines = new Mine[rows][columns];
         ArrayList<Integer> randIndexes = new ArrayList<>();
 
@@ -54,9 +53,6 @@ public class MineManager {
             randIndexes.add(new Integer(i));
         }
         Collections.shuffle(randIndexes);
-        for(int index: randIndexes) {
-            System.out.println(index);
-        }
 
         for(int i=0; i<rows; i++) {
             for(int j=0; j<columns; j++) {
@@ -65,7 +61,6 @@ public class MineManager {
                 for(int index: randIndexes) {
                     if(k<count && isDone==false) {
                         if (index == (i * columns) + j) {
-                            System.out.println("Index matched.");
                             mines[i][j] = new Mine(false, true);
                             isDone = true;
                         } else
@@ -75,15 +70,6 @@ public class MineManager {
                     else if(isDone == false)
                         mines[i][j] = new Mine(false, false);
                 }
-            }
-        }
-        printMines();
-    }
-
-    private void printMines() {
-        for(int i=0; i<rows; i++) {
-            for(int j=0; j<columns; j++) {
-                System.out.println("Is revealed:" + getMines(i,j).isRevealed() + ", is Present: " + getMines(i,j).isPresent());
             }
         }
     }
@@ -101,8 +87,6 @@ public class MineManager {
     }
 
     public Mine getMines(int x, int y) {
-        System.out.println("\n\nIn mine manager class: " + this.getRows() + "," + this.getColumns() + "  Count = " + this.getCount() + "\n\n");
-        System.out.println("x = " + x + " and Y = " + y);
         return mines[x][y];
     }
 }

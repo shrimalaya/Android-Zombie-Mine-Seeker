@@ -62,7 +62,6 @@ public class OptionsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     manager.setCount(mineOption);
                     manager.populateMines();
-                    System.out.println("In number: " + manager.getRows() + "," + manager.getColumns() + "  Count = " + mineOption + "\n\n");
                 }
             });
 
@@ -93,7 +92,6 @@ public class OptionsActivity extends AppCompatActivity {
                     manager.setRows(rowOption);
                     manager.setColumns(colOption);
                     manager.populateMines();
-                    System.out.println("In sizes: " + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
                 }
             });
 
@@ -109,8 +107,6 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(OptionsActivity.this, "Reset Total", Toast.LENGTH_SHORT).show();
-                manager = MineManager.getInstance();
-                System.out.println("Main instance: " + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
             }
         });
     }

@@ -45,12 +45,10 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         manager = MineManager.getInstance();
-        System.out.println("\n\n" + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
         populateButtons();
         TextView textView = findViewById(R.id.txtMaxMines);
         textView.setText("" + manager.getCount());
         updateUI();
-        System.out.println("\n\n" + manager.getRows() + "," + manager.getColumns() + "  Count = " + manager.getCount() + "\n\n");
     }
 
     private void populateButtons() {
@@ -81,16 +79,18 @@ public class GameActivity extends AppCompatActivity {
                         if(temp.isPresent()) {
                             if (temp.isRevealed()) {
                                 num_scans++;
+                                manager.getMines(finalRow, finalCol).showText();
                                 updateUI();
                             } else {
                                 num_found++;
-                                updateUI();
                                 setMineRevealed(finalRow, finalCol);
+                                updateUI();
                             }
                         }
                         else {
                             num_scans++;
                             manager.getMines(finalRow, finalCol).reveal();
+                            manager.getMines(finalRow, finalCol).showText();
                             updateUI();
                         }
                     }
@@ -180,7 +180,8 @@ public class GameActivity extends AppCompatActivity {
                 count++;
             }
         }
-        if(manager.getMines(x, y).isRevealed()) {
+
+        if(manager.getMines(x, y).isRevealed() && manager.getMines(x,y).showsText()) {
             Button button = buttons[x][y];
             button.setText("" + count);
         }
