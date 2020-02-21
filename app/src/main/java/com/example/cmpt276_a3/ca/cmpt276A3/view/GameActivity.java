@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,6 +27,9 @@ import android.widget.TextView;
 
 import com.example.cmpt276_a3.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameActivity extends AppCompatActivity {
     MineManager manager = MineManager.getInstance();
     int num_scans = 0;
@@ -32,6 +37,9 @@ public class GameActivity extends AppCompatActivity {
 
     Button buttons[][] = new Button[manager.getRows()][manager.getColumns()];
     Animation rotateAnimation;
+    Animation animation;
+
+    Timer timer;
 
     private static final String EXTRA_MESSAGE = "Extra";
 
@@ -137,6 +145,7 @@ public class GameActivity extends AppCompatActivity {
                         }
                     }
                 });
+
                 tableRow.addView(button);
                 buttons[i][j] = button;
             }
@@ -153,7 +162,7 @@ public class GameActivity extends AppCompatActivity {
                 button.setMinWidth(width);
                 button.setMaxWidth(width);
 
-                int height = button.getWidth();
+                int height = button.getHeight();
                 button.setMinHeight(height);
                 button.setMaxHeight(height);
             }
@@ -183,7 +192,9 @@ public class GameActivity extends AppCompatActivity {
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        button.startAnimation(rotateAnimation);
+        if(num_found < manager.getCount()) {
+            button.startAnimation(rotateAnimation);
+        }
 
         // Set the text
         button.setText("");
@@ -201,8 +212,7 @@ public class GameActivity extends AppCompatActivity {
 
         found.setText("" + num_found);
         totalScans.setText("" + num_scans);
-
-        for(int i=0; i<manager.getRows(); i++) {
+        for (int i = 0; i < manager.getRows(); i++) {
             for (int j = 0; j < manager.getColumns(); j++) {
                 updateRowsAndCols(i, j);
             }
@@ -211,6 +221,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateRowsAndCols(int x, int y) {
         manager = MineManager.getInstance();
+        animation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+
         int count = 0;
         for (int i = 0; i < manager.getColumns(); i++) {
             Mine temp = manager.getMines(x, i);
@@ -226,9 +238,36 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
-            Button button = buttons[x][y];
-            button.setText("" + count);
+        if(num_found >= manager.getCount()) {
+            if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
+                Button button = buttons[x][y];
+                button.setText("" + count);
+            }
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    gameOver();
+                }
+            }, 500);
         }
+        else {
+            if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
+                Button button = buttons[x][y];
+                button.setText("" + count);
+                button.setTextSize(18);
+                if(manager.getMines(x, y).isPresent())
+                {
+                    button.setTextColor(Color.parseColor("#ffffff"));
+                }
+                button.startAnimation(animation);
+            }
+        }
+    }
+
+    private void gameOver() {
+        FragmentManager fragManager = getSupportFragmentManager();
+        MessageFragment dialog = new MessageFragment();
+        dialog.show(fragManager, "MessageDialog");
     }
 }

@@ -46,5 +46,6 @@
     \n\t5. If a mine is not present, the click will count as a scan and text will be displayed
     \n\t6. Finish the game in minimum number of scans possible
     \n\n*Note: Game starts with default size of 4 X 6 and 6 Mines</string>
+    <string name="dialog_congratulations">Congratulations!\nYou have won!</string>
 
 </resources>
