@@ -67,6 +67,18 @@ public class GameActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        // Re-hide the status bar whenever it reappears
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                View decorView = getWindow().getDecorView();
+                if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN);
+                }
+            }
+        });
     }
 
     private void populateButtons() {

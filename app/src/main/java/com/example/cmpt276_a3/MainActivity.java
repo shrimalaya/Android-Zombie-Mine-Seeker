@@ -30,12 +30,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        hideUIelements();
         launchWelcomeActivity();
         playGame();
 
         ImageView image = findViewById(R.id.imgMainMenu);
         image.setImageResource(R.drawable.main_logo);
 
+
+    }
+
+    /**
+     * Citation: Learned from developer.android.com/reference/android/view
+     */
+    private void hideUIelements() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -45,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        // Re-hide the status bar whenever it reappears
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                View decorView = getWindow().getDecorView();
+                if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN);
+                }
+            }
+        });
     }
 
     private void launchWelcomeActivity() {
@@ -65,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        hideUIelements();
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -75,12 +96,16 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        hideUIelements();
+
         switch(item.getItemId()) {
             case(R.id.main_Options):
+                hideUIelements();
                 Intent i1 = OptionsActivity.makeLaunchIntent(MainActivity.this, "Options");
                 startActivityForResult(i1, 31);
                 return true;
             case(R.id.main_Help):
+                hideUIelements();
                 Intent i2 = HelpActivity.makeLaunchIntent(MainActivity.this, "Help");
                 startActivityForResult(i2, 33);
                 return true;

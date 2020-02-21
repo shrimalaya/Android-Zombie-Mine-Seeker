@@ -9,9 +9,9 @@ import java.util.List;
  * Singleton class
  */
 public class MineManager {
-    private int rows;
-    private int columns;
-    private int count;
+    private int rows = 4;
+    private int columns = 6;
+    private int count = 6;
     private Mine[][] mines;
 
     private MineManager() {
