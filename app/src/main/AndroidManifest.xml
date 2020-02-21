@@ -9,23 +9,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ca.cmpt276A3.view.HelpActivity"></activity>
+        <activity android:name=".ca.cmpt276A3.view.HelpActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"></activity>
         <activity
             android:name=".ca.cmpt276A3.view.OptionsActivity"
             android:label="@string/title_activity_options"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".ca.cmpt276A3.view.GameActivity"
             android:label="@string/title_activity_game"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+            />
         <activity
             android:name=".ca.cmpt276A3.view.WelcomeActivity"
             android:label="@string/title_activity_welcome"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

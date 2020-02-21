@@ -49,10 +49,29 @@ public class GameActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.txtMaxMines);
         textView.setText("" + manager.getCount());
         updateUI();
+
+        Button goBack = findViewById(R.id.btnGoBack);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     private void populateButtons() {
         manager = MineManager.getInstance();
+        manager.populateMines();
         TableLayout table = (TableLayout) findViewById(R.id.tableMines);
         for(int i=0; i<manager.getRows(); i++) {
             TableRow tableRow = new TableRow(this);
@@ -135,7 +154,7 @@ public class GameActivity extends AppCompatActivity {
         // Scale background to button
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.action_history);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine_icon);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource =  getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));

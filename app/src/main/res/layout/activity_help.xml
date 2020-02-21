@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00CC2C2C"
+    android:background="@drawable/zombies_running"
     android:clickable="true"
-    tools:context=".ca.cmpt276A3.view.HelpActivity">
+    tools:context=".ca.cmpt276A3.view.HelpActivity"
+    >
 
     <TextView
         android:id="@+id/textView"

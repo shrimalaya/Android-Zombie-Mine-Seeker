@@ -26,27 +26,27 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.054" />
+            app:layout_constraintVertical_bias="0.112" />
 
         <TextView
             android:id="@+id/txtAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_width="269dp"
+            android:layout_height="111dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="23dp"
             android:layout_marginRight="23dp"
             android:fontFamily="serif-monospace"
-            android:text="By:\n\tSrimalaya Ladha\n\tladha@sfu.ca"
-            android:textSize="18sp"
+            android:text="By:\nSrimalaya Ladha\nLadha@sfu.ca"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.403"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.218"
+            app:layout_constraintStart_toEndOf="@+id/imgWelcome"
             app:layout_constraintTop_toBottomOf="@+id/textWelcome" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imgWelcome"
+            android:layout_width="133dp"
+            android:layout_height="123dp"
             android:layout_marginStart="26dp"
             android:layout_marginLeft="26dp"
             android:layout_marginTop="72dp"
@@ -57,12 +57,24 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textWelcome"
-            app:layout_constraintVertical_bias="0.367"
+            app:layout_constraintVertical_bias="0.515"
             tools:srcCompat="@tools:sample/avatars[7]"
             tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginBottom="17dp"
+            android:text="*Click the 'X' to skip to Main menu"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
