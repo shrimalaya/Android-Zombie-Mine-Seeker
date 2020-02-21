@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="18dp"
-        android:text="Select your options from the drop down menu"
+        android:text="@string/main_fixed_message"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

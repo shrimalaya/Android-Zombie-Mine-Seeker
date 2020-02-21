@@ -15,7 +15,7 @@
         android:layout_marginStart="19dp"
         android:layout_marginLeft="19dp"
         android:layout_marginTop="13dp"
-        android:text="Found "
+        android:text="@string/fixed_found"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +23,9 @@
         android:id="@+id/txt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" out of "
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:text="@string/fixed_out_of"
         app:layout_constraintStart_toEndOf="@+id/txtFoundMines"
         app:layout_constraintTop_toTopOf="@+id/txtFoundMines" />
 
@@ -31,7 +33,9 @@
         android:id="@+id/txt3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" mines"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:text="@string/FIXED_mines"
         app:layout_constraintStart_toEndOf="@+id/txtMaxMines"
         app:layout_constraintTop_toTopOf="@+id/txtMaxMines" />
 
@@ -39,7 +43,9 @@
         android:id="@+id/txt4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="# Scans used: "
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:text="@string/fixed_scans_used"
         app:layout_constraintEnd_toStartOf="@+id/txtScans"
         app:layout_constraintTop_toTopOf="@+id/txt3" />
 
@@ -47,8 +53,10 @@
         android:id="@+id/txt5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:layout_marginBottom="8dp"
-        android:text="Times Played: "
+        android:text="@string/fixed_times_played"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtTimesPlayed" />
 
@@ -56,7 +64,9 @@
         android:id="@+id/txtFoundMines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:text="@string/changeable_found"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/txt1"
         app:layout_constraintTop_toTopOf="@+id/txt1" />
@@ -65,7 +75,9 @@
         android:id="@+id/txtMaxMines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="8"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:text="@string/changeable_total"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/txt2"
         app:layout_constraintTop_toTopOf="@+id/txt2" />
@@ -76,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="0"
+        android:text="@string/changeable_scans"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txt4" />
@@ -87,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="0"
+        android:text="@string/changeable_totalTimes"
         app:layout_constraintBottom_toBottomOf="@+id/txt5"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -116,7 +128,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
-        android:text="Main Menu"
+        android:text="@string/btn_goToMain"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

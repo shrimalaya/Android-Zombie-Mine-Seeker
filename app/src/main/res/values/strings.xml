@@ -1,7 +1,50 @@
 <resources>
-    <string name="app_name">Main Menu</string>
+    <string name="app_name">Main</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_welcome">Mine Seeker</string>
     <string name="title_activity_game">Game Screen</string>
     <string name="title_activity_options">Options</string>
+    <string name="title_activity_help">Help</string>
+
+    <string name="help_about_the_author">
+        <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">About the author</a>
+    </string>
+    <string name="help_content">Thank you for playing the Mine Seeker Game!</string>
+    <string name="fixed_found">Found</string>
+    <string name="fixed_out_of">out of</string>
+    <string name="FIXED_mines">mines</string>
+    <string name="fixed_scans_used"># Scans used:</string>
+    <string name="fixed_times_played">Times Played:</string>
+    <string name="changeable_found">0</string>
+    <string name="changeable_total">8</string>
+    <string name="changeable_scans">0</string>
+    <string name="changeable_totalTimes">0</string>
+    <string name="btn_goToMain">Main Menu</string>
+    <string name="main_fixed_message">Select your options from the drop down menu</string>
+    <string name="options_select_sizes">Choose a board size and the number of mines from the following options</string>
+    <string name="optons_fixed_size">Size</string>
+    <string name="options_number_of_mines">Number of mines</string>
+    <string name="options_btn_reset">Reset # times played</string>
+    <string name="welcome_greet">Welcome to the Mine Seeker game!</string>
+    <string name="welcome_author">By:\nSrimalaya Ladha ladha@sfu.ca</string>
+    <string name="welcome_image">Image</string>
+    <string name="welcome_message">*Click the \'X\' to skip to Main menu</string>
+    <string name="help_fixed_citations">Citations:</string>
+    <string name="help_cite_background">
+        <a href="https://www.shutterstock.com/image-vector/silhouette-vector-zombie-group-side-view-1184628733">Background,</a></string>
+    <string name="help_cite_mine_icon">
+        <a href="http://logosolusa.com/stubbs-the-zombie-logo.html">Mine Icon,</a></string>
+    <string name="help_cite_welcome_screen_cartoon">
+        <a href="http://cartoonize.net">Welcome Screen Cartoon</a></string>
+    <string name="help_cite_game_logo">
+        <a href="http://logosolusa.com/zombie-logo.html">Game Logo,</a></string>
+    <string name="help_directions">Playing Instructions:
+    \n\t1. Select options from the drop-down menu on Main Screen
+    \n\t2. Start the game and click on a tile to check whether a mine is present or not
+    \n\t3. If no mine is present, the click will count as a scan.
+    \n\t4. If a mine is present but is already revealed, the click will count as a scan and text will be displayed
+    \n\t5. If a mine is not present, the click will count as a scan and text will be displayed
+    \n\t6. Finish the game in minimum number of scans possible
+    \n\n*Note: Game starts with default size of 4 X 6 and 6 Mines</string>
+
 </resources>

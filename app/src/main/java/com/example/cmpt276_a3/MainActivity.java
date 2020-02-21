@@ -3,14 +3,10 @@ package com.example.cmpt276_a3;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
-import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.GameActivity;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.HelpActivity;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.OptionsActivity;
 import com.example.cmpt276_a3.ca.cmpt276A3.view.WelcomeActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
 
         hideUIelements();
@@ -36,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView image = findViewById(R.id.imgMainMenu);
         image.setImageResource(R.drawable.main_logo);
-
-
     }
 
     /**

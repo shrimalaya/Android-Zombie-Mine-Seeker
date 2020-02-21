@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
 
         ImageView image  = findViewById(R.id.imgWelcome);
@@ -43,6 +42,13 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        hideUIelements();
+    }
+
+    /**
+     * Citation: Learned from developer.android.com/reference/android/view
+     */
+    private void hideUIelements() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -58,12 +64,11 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onSystemUiVisibilityChange(int visibility) {
                 View decorView = getWindow().getDecorView();
-                if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                     decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
                             | View.SYSTEM_UI_FLAG_FULLSCREEN);
                 }
             }
         });
     }
-
 }

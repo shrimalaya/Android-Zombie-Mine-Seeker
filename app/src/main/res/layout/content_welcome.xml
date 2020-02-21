@@ -17,10 +17,10 @@
 
         <TextView
             android:id="@+id/textWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="593dp"
+            android:layout_height="60dp"
             android:fontFamily="serif-monospace"
-            android:text="\t\t\tWelcome to the\nMine Seeker game!"
+            android:text="@string/welcome_greet"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -30,13 +30,13 @@
 
         <TextView
             android:id="@+id/txtAuthor"
-            android:layout_width="269dp"
-            android:layout_height="111dp"
+            android:layout_width="295dp"
+            android:layout_height="117dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="23dp"
             android:layout_marginRight="23dp"
             android:fontFamily="serif-monospace"
-            android:text="By:\nSrimalaya Ladha\nLadha@sfu.ca"
+            android:text="@string/welcome_author"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.218"
@@ -45,22 +45,22 @@
 
         <ImageView
             android:id="@+id/imgWelcome"
-            android:layout_width="133dp"
-            android:layout_height="123dp"
+            android:layout_width="148dp"
+            android:layout_height="141dp"
             android:layout_marginStart="26dp"
             android:layout_marginLeft="26dp"
             android:layout_marginTop="72dp"
             android:layout_marginEnd="257dp"
             android:layout_marginRight="257dp"
             android:layout_marginBottom="203dp"
-            android:contentDescription="Image"
+            android:contentDescription="@string/welcome_image"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textWelcome"
-            app:layout_constraintVertical_bias="0.515"
+            app:layout_constraintVertical_bias="0.615"
             tools:srcCompat="@tools:sample/avatars[7]"
             tools:visibility="visible" />
 
@@ -71,7 +71,7 @@
             android:layout_marginStart="21dp"
             android:layout_marginLeft="21dp"
             android:layout_marginBottom="17dp"
-            android:text="*Click the 'X' to skip to Main menu"
+            android:text="@string/welcome_message"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

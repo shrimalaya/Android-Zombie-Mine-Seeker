@@ -41,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
 
         manager = MineManager.getInstance();
@@ -58,6 +58,13 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        hideUIelements();
+    }
+
+    /**
+     * Citation: Learned from developer.android.com/reference/android/view
+     */
+    private void hideUIelements() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -73,7 +80,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onSystemUiVisibilityChange(int visibility) {
                 View decorView = getWindow().getDecorView();
-                if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                     decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
                             | View.SYSTEM_UI_FLAG_FULLSCREEN);
                 }
