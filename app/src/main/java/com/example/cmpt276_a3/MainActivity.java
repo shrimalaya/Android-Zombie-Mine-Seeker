@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -24,6 +26,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    Animation fadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView image = findViewById(R.id.imgMainMenu);
         image.setImageResource(R.drawable.main_logo);
+        fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        image.startAnimation(fadeIn);
     }
 
     /**
