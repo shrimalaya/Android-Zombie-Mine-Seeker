@@ -15,7 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,6 +31,7 @@ public class GameActivity extends AppCompatActivity {
     int num_found = 0;
 
     Button buttons[][] = new Button[manager.getRows()][manager.getColumns()];
+    Animation rotateAnimation;
 
     private static final String EXTRA_MESSAGE = "Extra";
 
@@ -178,6 +182,9 @@ public class GameActivity extends AppCompatActivity {
         Resources resource =  getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
+        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        button.startAnimation(rotateAnimation);
+
         // Set the text
         button.setText("");
     }
@@ -205,21 +212,21 @@ public class GameActivity extends AppCompatActivity {
     private void updateRowsAndCols(int x, int y) {
         manager = MineManager.getInstance();
         int count = 0;
-        for(int i=0; i<manager.getColumns(); i++) {
+        for (int i = 0; i < manager.getColumns(); i++) {
             Mine temp = manager.getMines(x, i);
-            if(temp.isPresent() && !(temp.isRevealed())) {
+            if (temp.isPresent() && !(temp.isRevealed())) {
                 count++;
             }
         }
 
-        for(int j=0; j<manager.getRows(); j++) {
+        for (int j = 0; j < manager.getRows(); j++) {
             Mine temp = manager.getMines(j, y);
-            if(temp.isPresent() && !(temp.isRevealed())) {
+            if (temp.isPresent() && !(temp.isRevealed())) {
                 count++;
             }
         }
 
-        if(manager.getMines(x, y).isRevealed() && manager.getMines(x,y).showsText()) {
+        if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
             Button button = buttons[x][y];
             button.setText("" + count);
         }

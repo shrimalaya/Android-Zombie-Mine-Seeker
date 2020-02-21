@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':myapplication'
 rootProject.name='CMPT276-A3'

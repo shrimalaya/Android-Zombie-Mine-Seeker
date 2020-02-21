@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Main</string>
+    <string name="app_name">Main Menu</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_welcome">Mine Seeker</string>
     <string name="title_activity_game">Game Screen</string>
