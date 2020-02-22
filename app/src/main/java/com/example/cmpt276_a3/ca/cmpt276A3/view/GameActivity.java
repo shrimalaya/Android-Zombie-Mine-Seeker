@@ -2,11 +2,13 @@ package com.example.cmpt276_a3.ca.cmpt276A3.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
@@ -21,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,11 +34,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameActivity extends AppCompatActivity {
-    MineManager manager = MineManager.getInstance();
+    MineManager manager;
     int num_scans = 0;
     int num_found = 0;
 
-    Button buttons[][] = new Button[manager.getRows()][manager.getColumns()];
+    Button buttons[][];
     Animation rotateAnimation;
     Animation animation;
 
@@ -56,10 +59,13 @@ public class GameActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
 
-        manager = MineManager.getInstance();
+        checkSharedPreferences();
+
         populateButtons();
+        manager = MineManager.getInstance();
         TextView textView = findViewById(R.id.txtMaxMines);
         textView.setText("" + manager.getCount());
+
         updateUI();
 
         Button goBack = findViewById(R.id.btnGoBack);
@@ -71,6 +77,38 @@ public class GameActivity extends AppCompatActivity {
         });
 
         hideUIelements();
+    }
+
+    private void checkSharedPreferences() {
+        // Times played
+        TextView txtTotal = findViewById(R.id.txtTimesPlayed);
+        int savedTotal = getNumTimesPlayed(this);
+        savedTotal++;
+        txtTotal.setText("" + savedTotal);
+        saveTotal(savedTotal);
+
+        manager = MineManager.getInstance();
+
+        int savedCount = getNumMinesSelected(this);
+        manager.setCount(savedCount);
+
+        int savedRows = getNumRowsSelected(this);
+        int savedCols = getNumColsSelected(this);
+        manager.setColumns(savedCols);
+        manager.setRows(savedRows);
+    }
+
+    static public int getNumTimesPlayed(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPreferences", MODE_PRIVATE);
+
+        return prefs.getInt("Total times played", 0);
+    }
+
+    private void saveTotal(int total) {
+        SharedPreferences pref = this.getSharedPreferences("AppPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("Total times played", total);
+        editor.apply();
     }
 
     /**
@@ -102,6 +140,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void populateButtons() {
         manager = MineManager.getInstance();
+        buttons = new Button[manager.getRows()][manager.getColumns()];
         manager.populateMines();
         TableLayout table = (TableLayout) findViewById(R.id.tableMines);
         for(int i=0; i<manager.getRows(); i++) {
@@ -122,6 +161,9 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
+                final MediaPlayer mp = MediaPlayer.create(GameActivity.this, R.raw.effect_1);
+                final MediaPlayer mp2 = MediaPlayer.create(GameActivity.this, R.raw.effect_2);
+
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -130,10 +172,14 @@ public class GameActivity extends AppCompatActivity {
                             if (temp.isRevealed()) {
                                 num_scans++;
                                 manager.getMines(finalRow, finalCol).showText();
+                                //Play sound
+                                mp.start();
                                 updateUI();
                             } else {
                                 num_found++;
                                 setMineRevealed(finalRow, finalCol);
+                                //Play sound
+                                mp2.start();
                                 updateUI();
                             }
                         }
@@ -141,6 +187,8 @@ public class GameActivity extends AppCompatActivity {
                             num_scans++;
                             manager.getMines(finalRow, finalCol).reveal();
                             manager.getMines(finalRow, finalCol).showText();
+                            //Play sound
+                            mp.start();
                             updateUI();
                         }
                     }
@@ -177,6 +225,7 @@ public class GameActivity extends AppCompatActivity {
         manager = MineManager.getInstance();
         manager.getMines(x, y).reveal();
         Button button = buttons[x][y];
+
         //Make text not clip on small buttons
         button.setPadding(0,0,0,0);
 
@@ -243,13 +292,7 @@ public class GameActivity extends AppCompatActivity {
                 Button button = buttons[x][y];
                 button.setText("" + count);
             }
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    gameOver();
-                }
-            }, 500);
+            gameOver();
         }
         else {
             if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
@@ -269,5 +312,26 @@ public class GameActivity extends AppCompatActivity {
         FragmentManager fragManager = getSupportFragmentManager();
         MessageFragment dialog = new MessageFragment();
         dialog.show(fragManager, "MessageDialog");
+    }
+
+    static public int getNumMinesSelected(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPreferences", MODE_PRIVATE);
+
+        int defaultValue = context.getResources().getInteger(R.integer.default_num_mines);
+        return prefs.getInt("Num of mines selected", defaultValue);
+    }
+
+    static public int getNumRowsSelected(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPreferences", MODE_PRIVATE);
+
+        int defaultValue = context.getResources().getInteger(R.integer.default_num_rows);
+        return prefs.getInt("Num of rows selected", defaultValue);
+    }
+
+    static public int getNumColsSelected(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPreferences", MODE_PRIVATE);
+
+        int defaultValue = context.getResources().getInteger(R.integer.default_num_cols);
+        return prefs.getInt("Num of columns selected", defaultValue);
     }
 }

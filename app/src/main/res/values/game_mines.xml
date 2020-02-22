@@ -7,4 +7,6 @@
         <item>20</item>
     </integer-array>
 
+    <integer name="default_num_mines">6</integer>
+
 </resources>
