@@ -109,4 +109,24 @@
         android:text="@string/help_directions"
         app:layout_constraintBottom_toTopOf="@+id/txtGameLogo"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSound_citation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/help_sounds"
+        app:layout_constraintBottom_toBottomOf="@+id/txtWelcomeCartoon"
+        app:layout_constraintStart_toEndOf="@+id/txtWelcomeCartoon"
+        app:layout_constraintTop_toTopOf="@+id/txtWelcomeCartoon" />
+
+    <TextView
+        android:id="@+id/txtDialogImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/help_dialog_images"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSound_citation"
+        app:layout_constraintStart_toEndOf="@+id/txtSound_citation"
+        app:layout_constraintTop_toTopOf="@+id/txtSound_citation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

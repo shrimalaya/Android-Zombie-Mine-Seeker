@@ -35,7 +35,7 @@
     <string name="help_cite_mine_icon">
         <a href="http://logosolusa.com/stubbs-the-zombie-logo.html">Mine Icon,</a></string>
     <string name="help_cite_welcome_screen_cartoon">
-        <a href="http://cartoonize.net">Welcome Screen Cartoon</a></string>
+        <a href="http://cartoonize.net">Welcome Screen Cartoon,</a></string>
     <string name="help_cite_game_logo">
         <a href="http://logosolusa.com/zombie-logo.html">Game Logo,</a></string>
     <string name="help_directions">Playing Instructions:
@@ -47,5 +47,9 @@
     \n\t6. Finish the game in minimum number of scans possible
     \n\n*Note: Game starts with default size of 4 X 6 and 6 Mines</string>
     <string name="dialog_congratulations">Congratulations!\nYou have won!</string>
+    <string name="help_sounds">
+        <a href="https://www.zedge.net/find/ringtones/1-second">Sounds,</a></string>
+    <string name="help_dialog_images">
+        <a href="http://logosolusa.com">Dialog Images</a></string>
 
 </resources>
