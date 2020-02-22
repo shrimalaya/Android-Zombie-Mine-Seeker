@@ -2,11 +2,13 @@ package com.example.cmpt276_a3.ca.cmpt276A3.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Singleton class
+ * <p>
+ * MineManager class implements a 2D array of Mine objects
+ * In addition to that, it store data regarding number of rows and columns
+ * Stores total number of mines present
  */
 public class MineManager {
     private int rows = 4;
@@ -26,7 +28,7 @@ public class MineManager {
     private static MineManager instance;
 
     public static MineManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new MineManager();
         }
         return instance;
@@ -44,30 +46,31 @@ public class MineManager {
         this.count = count;
     }
 
+    /**
+     * Randomize mine distribution on game board
+     */
     public void populateMines() {
         mines = new Mine[rows][columns];
         ArrayList<Integer> randIndexes = new ArrayList<>();
 
-        for(int i=0; i<rows*columns; i++)
-        {
+        for (int i = 0; i < rows * columns; i++) {
             randIndexes.add(new Integer(i));
         }
         Collections.shuffle(randIndexes);
 
-        for(int i=0; i<rows; i++) {
-            for(int j=0; j<columns; j++) {
-                int k=0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int k = 0;
                 boolean isDone = false;
-                for(int index: randIndexes) {
-                    if(k<count && isDone==false) {
+                for (int index : randIndexes) {
+                    if (k < count && isDone == false) {
                         if (index == (i * columns) + j) {
                             mines[i][j] = new Mine(false, true);
                             isDone = true;
                         } else
                             mines[i][j] = new Mine(false, false);
                         k++;
-                    }
-                    else if(isDone == false)
+                    } else if (isDone == false)
                         mines[i][j] = new Mine(false, false);
                 }
             }

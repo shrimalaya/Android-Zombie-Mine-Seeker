@@ -3,23 +3,27 @@ package com.example.cmpt276_a3.ca.cmpt276A3.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.cmpt276_a3.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * First activity to be seen on game
+ * Lasts for maximum of 8.5 seconds (including all animation)
+ * Can be skipped using the on-screen FAB
+ * Displays Author information and welcome message
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
     private static final String EXTRA_MESSAGE = "Extra";
@@ -39,12 +43,12 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         setContentView(R.layout.activity_welcome);
         Toolbar toolbar = findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
 
-        image  = findViewById(R.id.imgWelcome);
+        image = findViewById(R.id.imgWelcome);
         image.setImageResource(R.drawable.shri);
 
         animate();

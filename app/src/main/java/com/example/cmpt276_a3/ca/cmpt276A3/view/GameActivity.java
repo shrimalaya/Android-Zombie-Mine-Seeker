@@ -10,29 +10,29 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-
-import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
-import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.MediaController;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-
 import com.example.cmpt276_a3.R;
+import com.example.cmpt276_a3.ca.cmpt276A3.model.Mine;
+import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
+/**
+ * Game Activituy
+ * Allows user to play game
+ * Implements TableLayout with buttons as columns
+ * Every button is associated with a Mine object using MineManager class
+ * Sets up game board using sharedPreferences set in Options Activity
+ */
 public class GameActivity extends AppCompatActivity {
     MineManager manager;
     int num_scans = 0;
@@ -41,8 +41,6 @@ public class GameActivity extends AppCompatActivity {
     Button buttons[][];
     Animation rotateAnimation;
     Animation animation;
-
-    Timer timer;
 
     private static final String EXTRA_MESSAGE = "Extra";
 
@@ -143,7 +141,7 @@ public class GameActivity extends AppCompatActivity {
         buttons = new Button[manager.getRows()][manager.getColumns()];
         manager.populateMines();
         TableLayout table = (TableLayout) findViewById(R.id.tableMines);
-        for(int i=0; i<manager.getRows(); i++) {
+        for (int i = 0; i < manager.getRows(); i++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -151,7 +149,7 @@ public class GameActivity extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for(int j=0; j<manager.getColumns(); j++) {
+            for (int j = 0; j < manager.getColumns(); j++) {
                 final int finalCol = j;
                 final int finalRow = i;
 
@@ -168,7 +166,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Mine temp = manager.getMines(finalRow, finalCol);
-                        if(temp.isPresent()) {
+                        if (temp.isPresent()) {
                             if (temp.isRevealed()) {
                                 num_scans++;
                                 manager.getMines(finalRow, finalCol).showText();
@@ -182,8 +180,7 @@ public class GameActivity extends AppCompatActivity {
                                 mp2.start();
                                 updateUI();
                             }
-                        }
-                        else {
+                        } else {
                             num_scans++;
                             manager.getMines(finalRow, finalCol).reveal();
                             manager.getMines(finalRow, finalCol).showText();
@@ -202,8 +199,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void lockButtonSizes() {
         manager = MineManager.getInstance();
-        for(int i = 0; i < manager.getRows(); i++){
-            for(int j = 0; j < manager.getColumns(); j++) {
+        for (int i = 0; i < manager.getRows(); i++) {
+            for (int j = 0; j < manager.getColumns(); j++) {
                 Button button = buttons[i][j];
 
                 int width = button.getWidth();
@@ -227,7 +224,7 @@ public class GameActivity extends AppCompatActivity {
         Button button = buttons[x][y];
 
         //Make text not clip on small buttons
-        button.setPadding(0,0,0,0);
+        button.setPadding(0, 0, 0, 0);
 
         // Lock button sizes
         lockButtonSizes();
@@ -237,11 +234,11 @@ public class GameActivity extends AppCompatActivity {
         int newHeight = button.getHeight();
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine_icon);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-        Resources resource =  getResources();
+        Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        if(num_found < manager.getCount()) {
+        if (num_found < manager.getCount()) {
             button.startAnimation(rotateAnimation);
         }
 
@@ -287,20 +284,18 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        if(num_found >= manager.getCount()) {
+        if (num_found >= manager.getCount()) {
             if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
                 Button button = buttons[x][y];
                 button.setText("" + count);
             }
             gameOver();
-        }
-        else {
+        } else {
             if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
                 Button button = buttons[x][y];
                 button.setText("" + count);
                 button.setTextSize(18);
-                if(manager.getMines(x, y).isPresent())
-                {
+                if (manager.getMines(x, y).isPresent()) {
                     button.setTextColor(Color.parseColor("#ffffff"));
                 }
                 button.startAnimation(animation);

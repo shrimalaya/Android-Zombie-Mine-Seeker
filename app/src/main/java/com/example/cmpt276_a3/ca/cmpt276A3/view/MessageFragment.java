@@ -3,18 +3,19 @@ package com.example.cmpt276_a3.ca.cmpt276A3.view;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.cmpt276_a3.R;
 
+/**
+ * Activity for dialogue box
+ * Finishes the calling activity upon clicking "OK"
+ */
 public class MessageFragment extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

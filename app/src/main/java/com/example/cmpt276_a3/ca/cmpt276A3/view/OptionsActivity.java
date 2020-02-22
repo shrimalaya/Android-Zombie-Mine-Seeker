@@ -4,24 +4,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextClock;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cmpt276_a3.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.cmpt276_a3.R;
+import com.example.cmpt276_a3.ca.cmpt276A3.model.MineManager;
+
+/**
+ * Options Activity allows user to select the preference of rows, columns and count of mines
+ * Activity uses SharedPreferences to store data
+ * Allows user to reset the number of games played
+ */
 public class OptionsActivity extends AppCompatActivity {
 
     private MineManager manager;
@@ -94,7 +95,7 @@ public class OptionsActivity extends AppCompatActivity {
         int[] mineOptions = getResources().getIntArray(R.array.num_mines);
 
         // Create the buttons
-        for(int i=0; i < mineOptions.length; i++) {
+        for (int i = 0; i < mineOptions.length; i++) {
             final int mineOption = mineOptions[i];
 
             RadioButton button = new RadioButton(this);
@@ -114,7 +115,7 @@ public class OptionsActivity extends AppCompatActivity {
             numMines.addView(button);
 
             // Select default button:
-            if(mineOption == getNumMinesSelected(this)) {
+            if (mineOption == getNumMinesSelected(this)) {
                 button.setChecked(true);
             }
         }
@@ -128,7 +129,7 @@ public class OptionsActivity extends AppCompatActivity {
         int[] colOptions = getResources().getIntArray(R.array.board_cols);
 
         // Create the buttons
-        for(int i=0; i < rowOptions.length; i++) {
+        for (int i = 0; i < rowOptions.length; i++) {
             final int rowOption = rowOptions[i];
             final int colOption = colOptions[i];
 
@@ -152,7 +153,7 @@ public class OptionsActivity extends AppCompatActivity {
             sizes.addView(button);
 
             // Select default button:
-            if(rowOption == getNumRowsSelected(this)) {
+            if (rowOption == getNumRowsSelected(this)) {
                 button.setChecked(true);
             }
         }
@@ -230,8 +231,8 @@ public class OptionsActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch(item.getItemId()) {
-            case(R.id.options_save):
+        switch (item.getItemId()) {
+            case (R.id.options_save):
                 finish();
             default:
                 return super.onOptionsItemSelected(item);

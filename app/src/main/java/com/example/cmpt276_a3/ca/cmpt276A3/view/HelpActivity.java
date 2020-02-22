@@ -1,17 +1,22 @@
 package com.example.cmpt276_a3.ca.cmpt276A3.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
-import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.cmpt276_a3.R;
 
+/**
+ * Help Activity
+ * Displays author information
+ * Shows all citations as hyperlinked text
+ * Guides user how to play the game
+ */
 public class HelpActivity extends AppCompatActivity {
 
     private static final String EXTRA_MESSAGE = "Extra";
