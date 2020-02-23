@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ca.cmpt276A3.view.GameActivity">
+    tools:context=".ca.cmpt276A3.view.GameActivity"
+    android:background="@drawable/main_logo">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

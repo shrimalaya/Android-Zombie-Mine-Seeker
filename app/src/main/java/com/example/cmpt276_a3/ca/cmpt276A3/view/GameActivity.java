@@ -158,7 +158,7 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
-
+                button.setAlpha(Float.parseFloat("0.9"));
                 final MediaPlayer mp = MediaPlayer.create(GameActivity.this, R.raw.effect_1);
                 final MediaPlayer mp2 = MediaPlayer.create(GameActivity.this, R.raw.effect_2);
 
@@ -236,6 +236,7 @@ public class GameActivity extends AppCompatActivity {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        button.setAlpha(1);
 
         rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
         if (num_found < manager.getCount()) {
@@ -288,12 +289,14 @@ public class GameActivity extends AppCompatActivity {
             if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
                 Button button = buttons[x][y];
                 button.setText("" + count);
+                button.setAlpha(1);
             }
             gameOver();
         } else {
             if (manager.getMines(x, y).isRevealed() && manager.getMines(x, y).showsText()) {
                 Button button = buttons[x][y];
                 button.setText("" + count);
+                button.setAlpha(1);
                 button.setTextSize(18);
                 if (manager.getMines(x, y).isPresent()) {
                     button.setTextColor(Color.parseColor("#ffffff"));
