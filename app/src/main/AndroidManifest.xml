@@ -12,8 +12,8 @@
         <activity
             android:name=".ca.cmpt276A3.view.HelpActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_help"
             android:screenOrientation="landscape"
+            android:label="@string/title_activity_help"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ca.cmpt276A3.view.OptionsActivity"
